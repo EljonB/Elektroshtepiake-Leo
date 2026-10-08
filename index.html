@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="sq" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektroshtepiake Leo | Cilësi & Besueshmëri Që nga Viti 2010</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="Icon" href="logo.jfif">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .toast-enter {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .toast-show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-500 selection:text-white">
+
+    <!-- CLEAN STICKY HEADER -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Title -->
+<div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('home')">
+    <!-- Kontenitori i Logos me Imazhin logo.jpg -->
+    <div class="w-11 h-11 rounded-2xl overflow-hidden shadow-md shadow-amber-500/25 group-hover:scale-105 transition-transform duration-200 border border-slate-100 flex items-center justify-center bg-white">
+        <img src="logo.jfif" alt="Elektroshtepiake Leo Logo" class="w-full h-full object-cover">
+    </div>
+    
+    <div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-none">
+            Elektroshtepiake <span class="text-amber-600">Leo</span>
+        </h1>
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-amber-600/90 mt-1">
+            Që nga Viti 2010
+        </p>
+    </div>
+</div>
+
+                <!-- Navigation Tabs (Desktop) -->
+                <nav class="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60">
+                    <button id="nav-home" onclick="switchTab('home')" class="px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 bg-white text-slate-900 shadow-sm">
+                        <i class="fa-solid fa-house mr-2 text-amber-600"></i>Kryefaqja
+                    </button>
+                    <button id="nav-products" onclick="switchTab('products')" class="px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 text-slate-600 hover:text-slate-900">
+                        <i class="fa-solid fa-store mr-2 text-amber-600"></i>Produktet 
+                    </button>
+                </nav>
+
+                <!-- Shopping Cart Action Button -->
+                <div class="flex items-center">
+                    <button onclick="toggleCartDrawer(true)" title="Shporta Juaj" 
+                            class="relative px-4 py-2.5 rounded-full bg-slate-900 hover:bg-amber-600 text-white flex items-center gap-2.5 shadow-md transition-all duration-200 active:scale-95">
+                        <i class="fa-solid fa-cart-shopping text-base text-amber-400"></i>
+                        <span class="text-xs font-bold hidden sm:inline">Shporta</span>
+                        <span id="cart-badge" class="bg-amber-500 text-slate-950 text-xs font-extrabold rounded-full px-2 py-0.5 min-w-[20px] text-center border border-white">
+                            0
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Mobile Navigation Strip -->
+            <div class="flex md:hidden border-t border-slate-100 py-2.5 justify-center space-x-2">
+                <button id="mob-nav-home" onclick="switchTab('home')" class="flex-1 py-2 text-center text-xs font-bold rounded-xl bg-amber-50 text-amber-700 border border-amber-200/80">
+                    <i class="fa-solid fa-house mr-1"></i> Kryefaqja
+                </button>
+                <button id="mob-nav-products" onclick="switchTab('products')" class="flex-1 py-2 text-center text-xs font-bold rounded-lg bg-slate-100 text-slate-600 border border-slate-200">
+                    <i class="fa-solid fa-store mr-1"></i> Produktet
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+
+        <!-- 1. HOME SECTION (KRYEFAQJA) -->
+        <section id="section-home" class="space-y-16 pb-16">
+            
+            <!-- Hero Banner -->
+            <div class="relative bg-slate-950 text-white overflow-hidden py-20 sm:py-28">
+                <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-transparent"></div>
+                
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold tracking-wider uppercase border border-amber-500/20">
+                            <i class="fa-solid fa-award"></i> Eksperiencë & Cilësi që nga viti 2010
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+                            Pajisjet Më të Mira për Shtëpinë dhe Kuzhinën Tuaj
+                        </h1>
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                            Mirësevini te <strong>Elektroshtepiake Leo</strong>. Prej më shumë se 15 vitesh ju ofrojmë kompletimin ideal të kuzhinës me tenxhere, tiganë, gota, dhe pajisje elektroshtëpiake të markave më të njohura.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <button onclick="switchTab('products')" class="px-8 py-4 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-2xl shadow-lg shadow-amber-600/30 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center gap-3">
+                                <span>Shfleto Produktet</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Kualitet i Garantuar</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Materiale cilësore, çelik inox i pandryshueshëm dhe sipërfaqe graniti pa ngjitje.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Transport në Shqipëri</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Dërgim i shpejtë dhe i sigurt i porosive tuaja në çdo qytet të Shqipërisë.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-tag"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Çmimet Më të Mira</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Marrëdhënie direkte me prodhuesit për të garantuar ofertat më ekonomike.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Porosi me WhatsApp</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Shtoni produktet në shportë dhe dërgoni porosinë menjëherë në WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Story Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-br from-amber-600 via-amber-700 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <span class="text-amber-200 font-bold tracking-wider uppercase text-xs">Historiku Jonë</span>
+                            <h2 class="text-3xl font-extrabold tracking-tight">Rreth Elektroshtepiake Leo</h2>
+                            <p class="text-amber-100/90 text-sm leading-relaxed">
+                                Që nga krijimi ynë në vitin 2010, fokusi ynë kryesor ka qenë kënaqësia e klientit dhe sjellja e produkteve më të qëndrueshme në treg. Nga setet elegante të gotave te tenxheret moderne me granit dhe pajisjet elektrike me teknologjinë e fundit, ne garantojmë cilësi në çdo produkt.
+                            </p>
+                            <div class="pt-4 flex items-center space-x-6">
+                                <div>
+                                    <div class="text-3xl font-black text-white">15+</div>
+                                    <div class="text-xs text-amber-200 uppercase font-semibold">Vite Përvojë</div>
+                                </div>
+                                <div class="w-px h-10 bg-amber-400/30"></div>
+                                <div>
+                                    <div class="text-3xl font-black text-white">40+</div>
+                                    <div class="text-xs text-amber-200 uppercase font-semibold">Produkte Kryesore</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-slate-900">
+                            <div class="bg-white rounded-2xl p-6 shadow-md space-y-4">
+                                <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-amber-600"></i> Horari i Punës në Dyqan
+                                </h4>
+                                <ul class="text-xs space-y-2.5 text-slate-600">
+                                    <li class="flex justify-between border-b border-slate-100 pb-2">
+                                        <span>E Hënë - E Shtunë:</span>
+                                        <span class="font-bold text-slate-900">08:00 - 20:00</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>E Dielë:</span>
+                                        <span class="font-bold text-slate-900">09:00 - 16:00</span>
+                                    </li>
+                                </ul>
+                                <button onclick="switchTab('products')" class="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-center text-xs transition shadow-sm">
+                                    Hap Katalogun me Produkte
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 2. PRODUCT CATALOG SECTION (40 PRODUCTS & PAGINATION) -->
+        <section id="section-products" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            
+            <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-900 tracking-tight">Katalogu i Produkteve</h2>
+                    <p class="text-slate-500 text-xs mt-1"></p>
+                </div>
+            </div>
+
+            <!-- Search, Filters and Sorting Bar -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-96">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="search-input" oninput="applyFilters()" placeholder="Kërko me emër (p.sh. Tenxhere, Air Fryer, Gota...)"
+                               class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition">
+                    </div>
+
+                    <!-- Sort Options Dropdown -->
+                    <div class="w-full md:w-auto flex items-center gap-2">
+                        <label for="sort-select" class="text-xs font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap">Rendit sipas:</label>
+                        <select id="sort-select" onchange="applyFilters()" class="w-full md:w-64 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="default">Rekomanduar</option>
+                            <option value="price-asc">Çmimi: Nga më i ulëti</option>
+                            <option value="price-desc">Çmimi: Nga më i larti</option>
+                            <option value="name-asc">Emri: (A - ZH)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-2 scrollbar-none" id="category-pills">
+                    <!-- Category pills generated via JS -->
+                </div>
+
+            </div>
+
+            <!-- Active Results Counter -->
+            <div class="flex justify-between items-center text-xs font-semibold text-slate-500">
+                <span id="product-count-label">Po shfaqen produktet...</span>
+                <span id="page-indicator-label" class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold">Faqja 1 / 2</span>
+            </div>
+
+            <!-- PRODUCT CARDS GRID (20 ITEMS PER PAGE) -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- 20 Product cards rendered dynamically -->
+            </div>
+
+            <!-- No results view -->
+            <div id="no-results" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-3"></i>
+                <h3 class="text-base font-bold text-slate-700">Nuk u gjet asnjë produkt</h3>
+                <p class="text-xs text-slate-500 mt-1">Provoni të kërkoni me fjalë të tjera ose hiqni filtrat.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-amber-600 text-white font-bold rounded-lg text-xs">
+                    Rivendos Filtrat
+                </button>
+            </div>
+
+            <!-- PAGINATION CONTROLS BAR -->
+            <div id="pagination-container" class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-500 font-medium" id="pagination-info">
+                    
+                </div>
+
+                <div class="flex items-center space-x-2" id="pagination-buttons">
+                    <!-- Dynamic page buttons rendered via JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- SLIDE-OVER SHOPPING CART DRAWER -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-96 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        
+        <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-amber-600 text-xl"></i>
+                <h3 class="font-bold text-slate-900 text-base">Shporta Juaj</h3>
+            </div>
+            <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-4">
+            <!-- Cart items inserted here dynamically -->
+        </div>
+
+        <div class="p-5 border-t border-slate-200 bg-slate-50 space-y-4">
+            <div class="flex justify-between items-center text-slate-700 font-semibold text-sm">
+                <span>Nëntotali:</span>
+                <span id="cart-subtotal" class="font-black text-slate-900 text-lg">0 Lekë</span>
+            </div>
+            
+            <button id="checkout-btn" onclick="openCheckoutModal()" disabled
+                    class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check"></i>
+                <span>Përfundo Porosinë</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6">
+            
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div>
+                <h3 class="text-2xl font-black text-slate-900">Konfirmo Porosinë</h3>
+                <p class="text-xs text-slate-500 mt-1">Zgjidhni mënyrën e dërgimit të porosisë te *Elektroshtepiake Leo*.</p>
+            </div>
+
+            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200/80">
+                <div class="flex justify-between text-xs font-bold text-amber-900 mb-2">
+                    <span>Përmbledhja e Shportës:</span>
+                    <span id="modal-item-count">0 Artikuj</span>
+                </div>
+                <div id="modal-items-list" class="text-xs text-amber-900/80 space-y-1.5 max-h-36 overflow-y-auto mb-2 pr-1">
+                    <!-- List of items -->
+                </div>
+                <div class="border-t border-amber-200 pt-2 flex justify-between font-black text-slate-900 text-base">
+                    <span>Totali:</span>
+                    <span id="modal-total-price" class="text-amber-700">0 Lekë</span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="sendOrderWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-3 transition shadow-md text-sm">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Porosit në WhatsApp (0677102913)</span>
+                </button>
+
+                <a href="tel:0677102913" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl flex items-center justify-center gap-3 transition text-sm">
+                    <i class="fa-solid fa-phone text-base"></i>
+                    <span>Telefono Tani (0677102913)</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 toast-enter transition-all duration-300 pointer-events-none border border-slate-800">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div id="toast-message" class="text-xs font-bold">U shtua në shportë!</div>
+    </div>
+
+    <!-- RICH & MODERN FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-800/80 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: About Us -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-amber-600 rounded-xl flex items-center justify-center text-white font-bold shadow-md shadow-amber-600/30">
+                            <i class="fa-solid fa-kitchen-set"></i>
+                        </div>
+                        <span class="text-lg font-black text-white tracking-tight">Elektroshtepiake Leo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Që prej vitit 2010, garancia dhe përkushtimi ynë për pajisje cilësore shtëpiake, tenxhere, tiganë dhe gota me çmimet më konkurruese në treg.
+                    </p>
+                </div>
+
+               
+
+                <!-- Col 3: Store Hours -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-bold text-xs uppercase tracking-wider"><object data=" type=""></object>Orari i Punës</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li class="flex justify-between border-b border-slate-800/80 pb-1.5">
+                            <span>E Hënë - E Shtunë:</span>
+                            <span class="text-white font-bold">08:00 - 20:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>E Dielë:</span>
+                            <span class="text-white font-bold">09:00 - 16:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact & Social Icons -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-bold text-xs uppercase tracking-wider">Na Kontaktoni</h4>
+                    <p class="text-xs text-slate-400">Klikoni ikonat për telefonatë, rrjete sociale ose harta:</p>
+                    
+                    <div class="flex items-center space-x-3 pt-1">
+                        <!-- Phone Icon -->
+                        <a href="tel:0677102913" title="Telefono: 0677102913" 
+                           class="w-11 h-11 rounded-2xl bg-slate-900 hover:bg-amber-600 text-white flex items-center justify-center transition border border-slate-800 shadow-sm active:scale-95">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </a>
+
+                        <!-- Instagram Icon -->
+                        <a href="https://maps.app.goo.gl/fSd4ENCaJFZtuMNZ9?g_st=ic" target="_blank" rel="noopener noreferrer" title="Instagram: @elektroshtepiakeleo.al"
+                           class="w-11 h-11 rounded-2xl bg-slate-900 hover:bg-pink-600 text-white flex items-center justify-center transition border border-slate-800 shadow-sm active:scale-95">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+
+                        <!-- Location Map Pin Icon -->
+                        <a href="https://maps.app.goo.gl/fSd4ENCaJFZtuMNZ9?g_st=ic" target="_blank" rel="noopener noreferrer" title="Vendndodhja në Google Maps"
+                           class="w-11 h-11 rounded-2xl bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center transition border border-slate-800 shadow-sm active:scale-95">
+                            <i class="fa-solid fa-location-dot text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Bar -->
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 Elektroshtepiake Leo. Të gjitha të drejtat të rezervuara.</p>
+                <p class="mt-2 sm:mt-0 font-medium">Cilësi & Besueshmëri Që nga Viti 2010</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+// EXACTLY 30 PRODUCTS DATABASE
+const productsDatabase = [
+    { id: 1, name: "Friteze Elektrike Hoffman", category: "Tenxhere & Tiganë", price: 5500, rating: 4.6, image: "products/img1.jfif", featured: true },
+    { id: 2, name: "Multicooker Hoffman", category: "Tenxhere & Tiganë", price: 6500, rating: 5.0, image: "products/img30.jfif", featured: false },
+    { id: 3, name: "Shtrydhese Agrumesh", category: "Pajisje Elektrike", price: 1900, rating: 4.9, image: "products/img3.jfif", featured: false },
+    { id: 4, name: "Toaster Haley", category: "Pajisje Elektrike", price: 2000, rating: 4.5, image: "products/img4.jfif", featured: false },
+    { id: 5, name: "Epilator Elektrik", category: "Kujdes Personal", price: 2000, rating: 5.0, image: "products/img5.jfif", featured: false },
+    { id: 6, name: "Xhezve Elektrike Hoffman", category: "Pajisje Elektrike", price: 500, rating: 4.7, image: "products/img6.jfif", featured: false },
+    { id: 7, name: "Grirese Multifunksionale Hoffman", category: "Pajisje Elektrike", price: 2000, rating: 4.0, image: "products/img7.jfif", featured: false },
+    { id: 8, name: "EGG Cooker", category: "Pajisje Elektrike", price: 1500, rating: 5.0, image: "products/img8.jfif", featured: false },
+    { id: 9, name: "Tenxhere me presion Hoffman-7.5L", category: "Tenxhere & Tiganë", price: 6000, rating: 5.0, image: "products/img9.jfif", featured: false },
+    { id: 10, name: "Nutri Bullet", category: "Pajisje Elektrike", price: 4900, rating: 4.6, image: "products/img10.jfif", featured: false },
+    { id: 11, name: "Kazan Multicooker INOX-6L", category: "Tenxhere & Tiganë", price: 1500, rating: 5.0, image: "products/img11.jfif", featured: false },
+    { id: 12, name: "Mikser Dore-Wolf", category: "Pajisje Elektrike", price: 1500, rating: 4.6, image: "products/img12.jfif", featured: false },
+    { id: 13, name: "Tenxhere me presion Hoffman-6L", category: "Tenxhere & Tiganë", price: 5500, rating: 4.6, image: "products/img13.jfif", featured: false },
+    { id: 14, name: "Gota Vere (Set 6 cop)", category: "Gota & Set Enësh", price: 1200, rating: 4.9, image: "products/img27.jfif", featured: false },
+    { id: 15, name: "Friteze Elektrike Hoffman", category: "Tenxhere & Tiganë", price: 7000, rating: 5.0, image: "products/img15.jfif", featured: false },
+    { id: 16, name: "Mankineri per kokoshka", category: "Pajisje Elektrike", price: 3490, rating: 4.1, image: "products/img16.jfif", featured: false },
+    { id: 17, name: "Toaster Hoffman", category: "Pajisje Elektrike", price: 2900, rating: 0.0, image: "products/img17.jfif", featured: false },
+    { id: 18, name: "Gota Alkoli (Set 6 cop)", category: "Gota & Set Enësh", price: 1000, rating: 4.7, image: "products/img18.jfif", featured: false },
+    { id: 19, name: "Mikrovale Hoffman", category: "Pajisje Elektrike", price: 7900, rating: 5.0, image: "products/img19.jfif", featured: false },
+    { id: 20, name: "Fshese me korent", category: "Pajisje Elektrike", price: 7900, rating: 4.7, image: "products/img20.jfif", featured: false },
+    { id: 21, name: "Gota Casablanca 29cl (Set 6 cop)", category: "Gota & Set Enësh", price: 600, rating: 4.6, image: "products/img28.jfif", featured: false },
+    { id: 22, name: "Pastruese Pushi Sonkay", category: "Kujdes Personal", price: 1000, rating: 5.0, image: "products/img22.jfif", featured: false },
+    { id: 23, name: "Set Kuzhine", category: "Gota & Set Enësh", price: 1900, rating: 4.7, image: "products/img23.jfif", featured: false },
+    { id: 24, name: "Tharse Flokesh Sonkay", category: "Kujdes Personal", price: 1900, rating: 5.0, image: "products/img24.jfif", featured: false },
+    { id: 25, name: "Hekur Sonkay", category: "Kujdes Personal", price: 2900, rating: 4.8, image: "products/img25.jfif", featured: false },
+    { id: 26, name: "Shtrydhese Frutash Hoffman", category: "Pajisje Elektrike", price: 6900, rating: 4.7, image: "products/img26.jfif", featured: false },
+    { id: 27, name: "Tenxhere Multicooker French Chef", category: "Tenxhere & Tiganë", price: 7500, rating: 5.0, image: "products/img14.jfif", featured: false },
+    { id: 28, name: "Pjaster Flokesh", category: "Kujdes Personal", price: 2500, rating: 4.9, image: "products/img21.jfif", featured: false },
+    { id: 29, name: "Gota Casablanca 16cl (Set 6 cop)", category: "Gota & Set Enësh", price: 600, rating: 5.0, image: "products/img29.jfif", featured: false },
+    { id: 30, name: "Pllake Elektrike Hoffman", category: "Pajisje Elektrike", price: 2900, rating: 4.6, image: "products/img2.jfif", featured: false }
+];
+
+// Global State variables
+let shoppingCart = [];
+let activeCategory = "Të Gjitha";
+let filteredItems = [...productsDatabase];
+let currentPage = 1;
+const itemsPerPage = 20;
+
+// Initialize App on DOM Load
+window.addEventListener('DOMContentLoaded', () => {
+    renderCategories();
+    applyFilters();
+    renderFeaturedProducts();
+    updateCartUI();
+});
+
+// Tab Switcher Function
+function switchTab(tabName) {
+    const homeSec = document.getElementById('section-home');
+    const prodSec = document.getElementById('section-products');
+
+    const navHome = document.getElementById('nav-home');
+    const navProd = document.getElementById('nav-products');
+
+    const mobHome = document.getElementById('mob-nav-home');
+    const mobProd = document.getElementById('mob-nav-products');
+
+    if (tabName === 'home') {
+        homeSec.classList.remove('hidden');
+        prodSec.classList.add('hidden');
+
+        navHome.className = "px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 bg-white text-slate-900 shadow-sm";
+        navProd.className = "px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 text-slate-600 hover:text-slate-900";
+
+        mobHome.className = "flex-1 py-2 text-center text-xs font-bold rounded-xl bg-amber-50 text-amber-700 border border-amber-200/80";
+        mobProd.className = "flex-1 py-2 text-center text-xs font-bold rounded-lg bg-slate-100 text-slate-600 border border-slate-200";
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        homeSec.classList.add('hidden');
+        prodSec.classList.remove('hidden');
+
+        navProd.className = "px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 bg-white text-slate-900 shadow-sm";
+        navHome.className = "px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-200 text-slate-600 hover:text-slate-900";
+
+        mobProd.className = "flex-1 py-2 text-center text-xs font-bold rounded-xl bg-amber-50 text-amber-700 border border-amber-200/80";
+        mobHome.className = "flex-1 py-2 text-center text-xs font-bold rounded-lg bg-slate-100 text-slate-600 border border-slate-200";
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+// Render Category Pills
+function renderCategories() {
+    const categories = ["Të Gjitha", "Tenxhere & Tiganë", "Gota & Set Enësh", "Pajisje Elektrike", "Kujdes Personal"];
+    const container = document.getElementById('category-pills');
+    
+    container.innerHTML = categories.map(cat => `
+        <button onclick="setCategory('${cat}')" 
+                class="px-4 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all duration-200 ${
+                    activeCategory === cat 
+                    ? 'bg-amber-600 text-white shadow-sm' 
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }">
+            ${cat}
+        </button>
+    `).join('');
+}
+
+function setCategory(cat) {
+    activeCategory = cat;
+    currentPage = 1;
+    renderCategories();
+    applyFilters();
+}
+
+        // Apply Search, Filters, and Sorting
+        function applyFilters() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sort-select').value;
+
+            filteredItems = productsDatabase.filter(product => {
+                const matchesCat = (activeCategory === "Të Gjitha") || (product.category === activeCategory);
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+
+            // Sorting
+            if (sortVal === 'price-asc') {
+                filteredItems.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-desc') {
+                filteredItems.sort((a, b) => b.price - a.price);
+            } else if (sortVal === 'name-asc') {
+                filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            currentPage = 1;
+            renderPaginatedProducts();
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('sort-select').value = 'default';
+            activeCategory = 'Të Gjitha';
+            currentPage = 1;
+            renderCategories();
+            applyFilters();
+        }
+
+        // Render Paginated Product Grid
+        function renderPaginatedProducts() {
+            const container = document.getElementById('products-grid');
+            const noResults = document.getElementById('no-results');
+            const countLabel = document.getElementById('product-count-label');
+            const pageIndicator = document.getElementById('page-indicator-label');
+            const paginationContainer = document.getElementById('pagination-container');
+
+            const totalItems = filteredItems.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+            const currentSlice = filteredItems.slice(startIndex, endIndex);
+
+            countLabel.textContent = `Po shfaqen ${totalItems} produkte gjithsej`;
+            pageIndicator.textContent = `Faqja ${currentPage} / ${totalPages}`;
+
+            if (totalItems === 0) {
+                container.innerHTML = '';
+                noResults.classList.remove('hidden');
+                paginationContainer.classList.add('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                paginationContainer.classList.remove('hidden');
+                container.innerHTML = currentSlice.map(item => createProductCardHTML(item)).join('');
+            }
+
+            renderPaginationControls(totalPages, startIndex, endIndex, totalItems);
+        }
+
+        // Render Pagination Controls (Page 1, Page 2, Next, Prev)
+        function renderPaginationControls(totalPages, startIndex, endIndex, totalItems) {
+            const infoEl = document.getElementById('pagination-info');
+            const buttonsContainer = document.getElementById('pagination-buttons');
+
+            infoEl.textContent = `Po shfaqen artikujt ${totalItems > 0 ? startIndex + 1 : 0}-${endIndex} nga ${totalItems} gjithsej`;
+
+            let buttonsHTML = `
+                <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} 
+                        class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i> Mëparshme
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                buttonsHTML += `
+                    <button onclick="goToPage(${i})" 
+                            class="w-9 h-9 rounded-xl text-xs font-bold transition ${
+                                currentPage === i 
+                                ? 'bg-amber-600 text-white shadow-sm' 
+                                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                            }">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            buttonsHTML += `
+                <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} 
+                        class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1">
+                    Tjetra <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+            `;
+
+            buttonsContainer.innerHTML = buttonsHTML;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderPaginatedProducts();
+            
+            // Scroll to catalog top
+            document.getElementById('section-products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Product Card HTML generator
+        function createProductCardHTML(item) {
+            return `
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
+                    <div class="relative aspect-square overflow-hidden bg-slate-100">
+                        <img src="${item.image}" alt="${item.name}" 
+                             onerror="this.src='https://placehold.co/600x600/f1f5f9/475569?text=Produkt+Leo'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-extrabold text-slate-700 shadow-sm border border-slate-100">
+                            ${item.category}
+                        </span>
+                    </div>
+
+                    <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center text-amber-500 text-xs gap-1 mb-1.5">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-slate-700">${item.rating}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug line-clamp-2 hover:text-amber-600 transition">
+                                ${item.name}
+                            </h3>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block font-semibold uppercase">Çmimi</span>
+                                <span class="text-base font-black text-amber-600">${item.price.toLocaleString('sq-AL')} Lekë</span>
+                            </div>
+                            <button onclick="addToCart(${item.id})" 
+                                    class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-amber-600 text-white flex items-center justify-center transition-colors shadow-md active:scale-95"
+                                    title="Shto në shportë">
+                                <i class="fa-solid fa-cart-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Featured Home Products
+        function renderFeaturedProducts() {
+            const featuredItems = productsDatabase.filter(p => p.featured);
+            const container = document.getElementById('featured-products-grid');
+            if (container) {
+                container.innerHTML = featuredItems.map(item => createProductCardHTML(item)).join('');
+            }
+        }
+
+        // SHOPPING CART FUNCTIONS
+        function addToCart(productId) {
+            const product = productsDatabase.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = shoppingCart.find(i => i.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                shoppingCart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`U shtua "${product.name}" në shportë`);
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = shoppingCart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                removeFromCart(productId);
+            } else {
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(productId) {
+            shoppingCart = shoppingCart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalCount = shoppingCart.reduce((sum, i) => sum + i.quantity, 0);
+            badge.textContent = totalCount;
+
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const subtotal = shoppingCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+            subtotalEl.textContent = `${subtotal.toLocaleString('sq-AL')} Lekë`;
+
+            if (shoppingCart.length === 0) {
+                checkoutBtn.disabled = true;
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-400 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-5xl text-slate-200"></i>
+                        <p class="font-bold text-slate-600 text-sm">Shporta juaj është bosh</p>
+                        <p class="text-xs text-slate-400">Shtoni produkte për të dërguar porosinë.</p>
+                    </div>
+                `;
+            } else {
+                checkoutBtn.disabled = false;
+                container.innerHTML = shoppingCart.map(item => `
+                    <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg border border-slate-200">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="text-xs font-bold text-slate-900 truncate">${item.name}</h4>
+                            <div class="text-xs text-amber-600 font-bold mt-0.5">${item.price.toLocaleString('sq-AL')} Lekë</div>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center text-xs font-bold">-</button>
+                                <span class="text-xs font-bold text-slate-800">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 p-1">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCartDrawer(open) {
+            const overlay = document.getElementById('cart-drawer-overlay');
+            const drawer = document.getElementById('cart-drawer');
+
+            if (open) {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        // Checkout Modal & WhatsApp Order Function
+        function openCheckoutModal() {
+            toggleCartDrawer(false);
+            const modal = document.getElementById('checkout-modal');
+            const itemCountEl = document.getElementById('modal-item-count');
+            const itemsListEl = document.getElementById('modal-items-list');
+            const totalPriceEl = document.getElementById('modal-total-price');
+
+            const totalCount = shoppingCart.reduce((sum, i) => sum + i.quantity, 0);
+            const subtotal = shoppingCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+
+            itemCountEl.textContent = `${totalCount} Artikuj`;
+            totalPriceEl.textContent = `${subtotal.toLocaleString('sq-AL')} Lekë`;
+
+            itemsListEl.innerHTML = shoppingCart.map(i => `
+                <div class="flex justify-between">
+                    <span>${i.quantity}x ${i.name}</span>
+                    <span class="font-bold">${(i.price * i.quantity).toLocaleString('sq-AL')} Lekë</span>
+                </div>
+            `).join('');
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function sendOrderWhatsApp() {
+            const phoneNumber = "355677102913"; 
+            let message = "Përshëndetje Elektroshtepiake Leo! Dëshiroj të bëj këtë porosi:\n\n";
+
+            shoppingCart.forEach(item => {
+                message += `• ${item.quantity}x ${item.name} - ${(item.price * item.quantity).toLocaleString('sq-AL')} Lekë\n`;
+            });
+
+            const subtotal = shoppingCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+            message += `\n*Totali: ${subtotal.toLocaleString('sq-AL')} Lekë*`;
+            message += `\n\nJu lutem më konfirmoni porosinë. Faleminderit!`;
+
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+
+            toastMsg.textContent = msg;
+            toast.classList.remove('toast-enter');
+            toast.classList.add('toast-show');
+
+            setTimeout(() => {
+                toast.classList.remove('toast-show');
+                toast.classList.add('toast-enter');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
